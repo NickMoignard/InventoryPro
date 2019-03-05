@@ -1,0 +1,40 @@
+<button id="bulk-update-btn">BULK UPDATE PAGE</button>
+
+<table>
+  <thead>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable 'item_id' %></th>
+    <th><%= sortable 'inventory' %></th>
+
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tr>
+  <% @products.each do |product| %>
+    <tr class="product">
+      <td><%= product.name %></td>
+      <td><%= product.item_id %></td>
+      <td><%= product.variants.pluck(:quantity).sum %></td>
+    </tr>
+
+      <% product.variants.each do |var| %>
+
+      <tr class="variant">
+
+          <td><%= var.title %></td>
+          <td class="input-variant-id"><%= var.variant_id %></td>
+          <td><%= var.quantity %></td>
+          <%= form_for var do |vf| %>
+            <td class="input-quantity"><%= vf.number_field :quantity %></td>
+            <td><%= vf.submit 'update individual quantity' %></td>
+          <% end %>
+      </tr>
+      <% end %>
+
+
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @products %>
