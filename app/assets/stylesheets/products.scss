@@ -1,0 +1,24 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+th .current {
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 12px 12px;
+}
+th .asc {
+  background-image: image_url("up_arrow.png");
+}
+th .desc {
+  background-image: image_url("down_arrow.png");
+}
+
+.product * {
+    font-weight: bold;
+}
+.variants * {
+  font-weight:  100;
+  background-color: lightgrey;
+}

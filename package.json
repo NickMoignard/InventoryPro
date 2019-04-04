@@ -1,0 +1,19 @@
+{
+  "name": "InventoryPro",
+  "private": true,
+  "dependencies": {
+    "@rails/webpacker": "3.5",
+    "@shopify/polaris": "^3.10.0",
+    "babel-preset-react": "^6.24.1",
+    "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react_ujs": "^2.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.15.3",
+    "eslint-plugin-react": "^7.12.4",
+    "webpack-dev-server": "2.11.2"
+  }
+}

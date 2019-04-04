@@ -57,8 +57,26 @@ class VariantsController  < ShopifyApp::AuthenticatedController
   end
 
   def bulk_update
-    BulkStockUpdaterJob.perform_later(params[:variants][:ids], params[:variants][:quantities])
+    # why doesn't this work? -> products_helper.rb VVV VVV VVV
+    # bulk_update_quantities(params[:variants][:ids], params[:variants][:quantities])
+    ids = params[:variants][:ids]
+    quantities = params[:variants][:quantities]
+
+    ids.each_with_index do |var_id, index|
+      begin
+        variant = Variant.find_by(variant_id: var_id)
+        variant.update!(quantity: quantities[index])
+
+        item =ShopifyAPI::InventoryLevel.find(:all, params: {:inventory_item_ids => variant.inventory_item_id}).first
+        item.set(variant.quantity)
+      rescue Exception => e
+        puts "e: #{e.inspect}"
+        next
+      end
+    end
+
     render json: { success: true }
+
   end
 
 
